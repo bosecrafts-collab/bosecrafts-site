@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  span?: string;
+}
+
+const { project, span = "" } = Astro.props;
+const { id, data } = project;
+
+// Helper to safely render titles with dynamic italic words
+const renderTitle = (title: string, italic?: string) => {
+  if (!italic) return title;
+  return title.replace(italic, `<span class="italic">${italic}</span>`);
+};
+
+// Check if a cover is explicitly set, otherwise use first image or fallback
+const coverImage = data.cover || (data.images && data.images[0]?.includes('/') ? data.images[0] : null);
+const hasRealImage = coverImage && coverImage.includes('/');
+---
+
+<a href={`/work/${id}`} class={`work-card ${span}`} data-cat={data.categorySlug} data-cursor="View">
+  {hasRealImage ? (
+    <img class="work-card-img" src={coverImage} alt={`${data.title} project preview`} loading="lazy" />
+  ) : (
+    <div class="work-placeholder" style={`background: linear-gradient(135deg, ${data.accent}22 0%, ${data.accent}08 100%); color: ${data.accent};`}>
+      {data.title.charAt(0)}
+    </div>
+  )}
+  <div class="work-card-overlay"></div>
+  <div class="work-card-year">{data.year}</div>
+  <div class="work-card-cta">↗</div>
+  
+  <div class="work-card-meta">
+    <div class="work-card-cat">{data.category}</div>
+    <div class="work-card-title">
+      <Fragment set:html={renderTitle(data.title, data.italic)} />
+    </div>
+  </div>
+</a>

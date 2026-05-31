@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact — Bosecrafts" theme="ember" description="Get in touch with Bosecrafts. We take on six to eight projects a year.">
+  <section class="container contact-hero" style="padding-top: calc(var(--header-h) + 60px); margin-bottom: 80px;">
+    <div class="reveal">
+      <span class="eyebrow accent">Get in Touch</span>
+      <h1 style="font-size: clamp(48px, 9vw, 140px); font-weight: 500; letter-spacing: -0.04em; line-height: 0.95; margin-top: 24px; margin-bottom: 24px;">
+        Tell us<br>
+        about <span class="italic" style="font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:var(--accent);">your</span><br>
+        project.
+      </h1>
+      <p class="lead" style="font-size:20px; color:var(--text-2); max-width:680px; line-height:1.55; margin-top:32px; margin-bottom: 48px;">
+        The form takes about two minutes. We reply within 24 hours, every working day. If we're not the right fit, we'll tell you and point you to someone who is.
+      </p>
+
+      <div class="contact-info-grid">
+        <div class="contact-info-card">
+          <div class="label">Email</div>
+          <a href="mailto:bosecrafts@gmail.com" class="value">bosecrafts@gmail.com</a>
+        </div>
+        <div class="contact-info-card">
+          <div class="label">Phone</div>
+          <a href="tel:+919933997777" class="value">+91 9933997777</a>
+        </div>
+        <div class="contact-info-card">
+          <div class="label">Studio</div>
+          <div class="value">Siliguri, India</div>
+        </div>
+        <div class="contact-info-card">
+          <div class="label">Response Time</div>
+          <div class="value">&lt; 24 hours</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ FORM ═══ -->
+    <form
+      class="contact-form reveal reveal-delay-1"
+      data-contact-form
+      data-fallback-email="bosecrafts@gmail.com"
+      data-endpoint="https://api.web3forms.com/submit"
+      novalidate
+      style="margin-top: 64px;"
+    >
+      <input type="hidden" name="access_key" value="0fd1aa4b-5743-43d7-a969-7dce15ed7c83">
+      <input type="hidden" name="subject" value="New Project Enquiry — Bosecrafts">
+      <input type="hidden" name="from_name" value="Bosecrafts Website">
+      <input type="hidden" name="redirect" value="false">
+      <h2 style="font-size:28px; margin-bottom:32px; letter-spacing:-0.02em; font-weight:500;">Project Enquiry</h2>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="bc-name">Your Name *</label>
+          <input id="bc-name" type="text" name="name" required placeholder="Jane Smith" autocomplete="name">
+          <div class="err-msg">Please enter your name.</div>
+        </div>
+        <div class="field">
+          <label for="bc-email">Email Address *</label>
+          <input id="bc-email" type="email" name="email" required placeholder="jane@company.com" autocomplete="email">
+          <div class="err-msg">Please enter a valid email.</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="bc-company">Company / Brand</label>
+        <input id="bc-company" type="text" name="company" placeholder="Acme & Co." autocomplete="organization">
+      </div>
+
+      <div class="field">
+        <label for="bc-project-type">Project Type</label>
+        <select id="bc-project-type" name="project-type">
+          <option value="">Select what you need...</option>
+          <option value="Brand Identity">Brand Identity</option>
+          <option value="Packaging">Packaging Design</option>
+          <option value="Web Design">Web Design / Product</option>
+          <option value="Strategy">Brand Strategy</option>
+          <option value="Consulting">Business Consulting</option>
+          <option value="Other">Something else</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Budget Range</label>
+        <input type="hidden" name="budget" value="">
+        <div class="budget-chips">
+          <button type="button" class="budget-chip" data-value="< ₹2L">&lt; ₹2L</button>
+          <button type="button" class="budget-chip" data-value="₹2L–5L">₹2L–5L</button>
+          <button type="button" class="budget-chip" data-value="₹5L–10L">₹5L–10L</button>
+          <button type="button" class="budget-chip" data-value="₹10L+">₹10L+</button>
+          <button type="button" class="budget-chip" data-value="Not sure">Not sure yet</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="bc-message">Tell us about your project *</label>
+        <textarea id="bc-message" name="message" required placeholder="We're launching a skincare line in Q4 and need a complete identity system including packaging for 11 SKUs..."></textarea>
+        <div class="err-msg">Please share a few words about your project.</div>
+      </div>
+
+      <div class="form-submit-row">
+        <div class="form-status"></div>
+        <button type="submit" class="btn btn-primary" data-cursor="Send">
+          <span>Send Enquiry</span>
+          <span class="icon">↗</span>
+        </button>
+      </div>
+
+      <p style="margin-top:24px; font-size:12px; color:var(--text-3); font-family:'JetBrains Mono',monospace; letter-spacing:0.04em;">
+        By submitting, you agree we'll reply by email. We don't share your details with anyone, ever.
+      </p>
+    </form>
+  </section>
+
+  <!-- ════ FAQ ════ -->
+  <section class="section container" style="margin-bottom: 120px; border-top: 1px solid var(--border); padding-top: 80px;">
+    <div class="section-head reveal">
+      <div class="head-meta">
+        <span class="eyebrow accent">FAQ</span>
+      </div>
+      <h2>Common <span class="italic" style="font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; color:var(--accent);">questions.</span></h2>
+    </div>
+
+    <div class="faq-grid reveal" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:24px; margin-top: 48px;">
+      <div class="value-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: clamp(24px, 3vw, 40px);">
+        <h3 style="font-size:22px; margin-bottom:12px; font-weight:500;">How long does a typical project take?</h3>
+        <p style="font-size:14px; color:var(--text-2); line-height:1.6;">Identity projects: 8–12 weeks. Web projects: 10–14 weeks. Full rebrand with strategy + identity + web: 16–20 weeks. We'll give you a hard timeline before we start.</p>
+      </div>
+      <div class="value-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: clamp(24px, 3vw, 40px);">
+        <h3 style="font-size:22px; margin-bottom:12px; font-weight:500;">Do you work with brands outside India?</h3>
+        <p style="font-size:14px; color:var(--text-2); line-height:1.6;">Yes. About 30% of our work is for clients in the UK, US, and Southeast Asia. We work async-first, with weekly sync calls scheduled in your timezone.</p>
+      </div>
+      <div class="value-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: clamp(24px, 3vw, 40px);">
+        <h3 style="font-size:22px; margin-bottom:12px; font-weight:500;">What's your typical project budget?</h3>
+        <p style="font-size:14px; color:var(--text-2); line-height:1.6;">Identity-only projects start at ₹2 lakhs. Full brand + web programs sit between ₹6L and ₹15L. We're transparent about pricing — happy to share rates before you fill out a form.</p>
+      </div>
+      <div class="value-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: clamp(24px, 3vw, 40px);">
+        <h3 style="font-size:22px; margin-bottom:12px; font-weight:500;">Can we see your contract / process?</h3>
+        <p style="font-size:14px; color:var(--text-2); line-height:1.6;">Yes — we'll send you a sample SOW, our process document, and three references after the initial intro call. Everything's transparent from the start.</p>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,73 @@
+---
+---
+<!-- Custom Cursor Elements are created dynamically via client-side script below to avoid SSR conflicts -->
+<script>
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  function initCursor() {
+    if (reduceMotion || isTouch || document.querySelector('.cursor')) return;
+
+    document.body.classList.add('has-cursor');
+
+    const cursor = document.createElement('div'); 
+    cursor.className = 'cursor';
+    const dot = document.createElement('div'); 
+    dot.className = 'cursor-dot';
+    document.body.append(cursor, dot);
+
+    let mx = -100, my = -100, cx = -100, cy = -100;
+    
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; 
+      my = e.clientY;
+      dot.style.transform = `translate3d(${mx - 2}px, ${my - 2}px, 0)`;
+    });
+
+    function loop() {
+      cx += (mx - cx) * 0.18;
+      cy += (my - cy) * 0.18;
+      cursor.style.transform = `translate3d(${cx - 16}px, ${cy - 16}px, 0)`;
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+
+    const hoverSel = 'a, button, .work-card, .service-card, .filter-btn, .budget-chip, [data-cursor]';
+    
+    document.addEventListener('mouseover', (e) => {
+      const target = e.target as HTMLElement;
+      const t = target.closest(hoverSel);
+      if (!t) return;
+      cursor.classList.add('hover');
+      const label = t.getAttribute('data-cursor');
+      if (label) { 
+        cursor.classList.add('labeled'); 
+        cursor.textContent = label; 
+      }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+      const target = e.target as HTMLElement;
+      const t = target.closest(hoverSel);
+      if (!t) return;
+      cursor.classList.remove('hover', 'labeled');
+      cursor.textContent = '';
+    });
+
+    document.addEventListener('mouseleave', () => { 
+      cursor.style.opacity = '0'; 
+      dot.style.opacity = '0'; 
+    });
+    
+    document.addEventListener('mouseenter', () => { 
+      cursor.style.opacity = '1'; 
+      dot.style.opacity = '1'; 
+    });
+  }
+
+  // Run on first load
+  initCursor();
+
+  // Re-run on Astro view transitions if active
+  document.addEventListener('astro:after-swap', initCursor);
+</script>

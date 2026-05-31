@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@stackbit/cms-contentful": "^1.0.36"
+  }
+}

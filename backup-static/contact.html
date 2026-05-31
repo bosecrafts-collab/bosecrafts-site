@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Bosecrafts</title>
+  <meta name="description" content="Get in touch with Bosecrafts. We take on six to eight projects a year.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23D9F65A'/%3E%3Ccircle cx='50' cy='50' r='30' fill='%230A0A0A'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/main.css?v=light-1">
+  <link rel="preload" href="assets/js/main.js" as="script">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BH43BB9Z70"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-BH43BB9Z70');
+  </script>
+  <meta name="theme-color" content="#FFFFFF">
+</head>
+<body class="contact-page">
+
+  <header class="nav">
+    <a href="index.html" class="nav-brand">
+      <img class="brand-logo-img" src="assets/img/site/logo.svg" alt="Bosecrafts logo" width="160" height="40" onerror="this.hidden=true">
+      <span class="brand-word">Bosecrafts<span style="color:var(--accent);" aria-hidden="true">.</span></span>
+    </a>
+    <nav class="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">Studio</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+    <a href="mailto:bosecrafts@gmail.com" class="nav-cta" data-cursor="Email">
+      bosecrafts@gmail.com <span class="arrow">↗</span>
+    </a>
+    <button class="menu-toggle" aria-label="Menu"><span></span></button>
+  </header>
+
+  <div class="mobile-drawer">
+    <a href="index.html">Home</a>
+    <a href="work.html">Work</a>
+    <a href="about.html">Studio</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <section class="container contact-hero">
+    <div class="reveal">
+      <span class="eyebrow accent">Get in Touch</span>
+      <h1 style="margin-top:24px;">
+        Tell us<br>
+        about <span class="italic">your</span><br>
+        project.
+      </h1>
+      <p class="lead" style="margin-top:32px;">
+        The form takes about two minutes. We reply within 24 hours, every working day. If we're not the right fit, we'll tell you and point you to someone who is.
+      </p>
+
+      <div class="contact-info-grid">
+        <div class="contact-info-card">
+          <div class="label">Email</div>
+          <a href="mailto:bosecrafts@gmail.com" class="value">bosecrafts@gmail.com</a>
+        </div>
+        <div class="contact-info-card">
+          <div class="label">Phone</div>
+          <a href="tel:+919933997777" class="value">+91 9933997777</a>
+        </div>
+        <div class="contact-info-card">
+          <div class="label">Studio</div>
+          <div class="value">Siliguri, India</div>
+        </div>
+        <div class="contact-info-card">
+          <div class="label">Response Time</div>
+          <div class="value">&lt; 24 hours</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ FORM ═══ -->
+    <form
+      class="contact-form reveal reveal-delay-1"
+      data-contact-form
+      data-fallback-email="bosecrafts@gmail.com"
+      data-endpoint="https://api.web3forms.com/submit"
+      novalidate
+    >
+      <!-- Web3Forms access key — get yours free at https://web3forms.com -->
+      <input type="hidden" name="access_key" value="0fd1aa4b-5743-43d7-a969-7dce15ed7c83">
+      <input type="hidden" name="subject" value="New Project Enquiry — Bosecrafts">
+      <input type="hidden" name="from_name" value="Bosecrafts Website">
+      <input type="hidden" name="redirect" value="false">
+      <h2 style="font-size:28px;margin-bottom:32px;letter-spacing:-0.02em;">Project Enquiry</h2>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="bc-name">Your Name *</label>
+          <input id="bc-name" type="text" name="name" required placeholder="Jane Smith" autocomplete="name">
+          <div class="err-msg">Please enter your name.</div>
+        </div>
+        <div class="field">
+          <label for="bc-email">Email Address *</label>
+          <input id="bc-email" type="email" name="email" required placeholder="jane@company.com" autocomplete="email">
+          <div class="err-msg">Please enter a valid email.</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="bc-company">Company / Brand</label>
+        <input id="bc-company" type="text" name="company" placeholder="Acme & Co." autocomplete="organization">
+      </div>
+
+      <div class="field">
+        <label for="bc-project-type">Project Type</label>
+        <select id="bc-project-type" name="project-type">
+          <option value="">Select what you need...</option>
+          <option value="Brand Identity">Brand Identity</option>
+          <option value="Packaging">Packaging Design</option>
+          <option value="Web Design">Web Design / Product</option>
+          <option value="Strategy">Brand Strategy</option>
+          <option value="Consulting">Business Consulting</option>
+          <option value="Other">Something else</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Budget Range</label>
+        <input type="hidden" name="budget" value="">
+        <div class="budget-chips">
+          <button type="button" class="budget-chip" data-value="< ₹2L">&lt; ₹2L</button>
+          <button type="button" class="budget-chip" data-value="₹2L–5L">₹2L–5L</button>
+          <button type="button" class="budget-chip" data-value="₹5L–10L">₹5L–10L</button>
+          <button type="button" class="budget-chip" data-value="₹10L+">₹10L+</button>
+          <button type="button" class="budget-chip" data-value="Not sure">Not sure yet</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="bc-message">Tell us about your project *</label>
+        <textarea id="bc-message" name="message" required placeholder="We're launching a skincare line in Q4 and need a complete identity system including packaging for 11 SKUs..."></textarea>
+        <div class="err-msg">Please share a few words about your project.</div>
+      </div>
+
+      <div class="form-submit-row">
+        <div class="form-status"></div>
+        <button type="submit" class="btn btn-primary" data-cursor="Send">
+          <span>Send Enquiry</span>
+          <span class="icon">↗</span>
+        </button>
+      </div>
+
+      <p style="margin-top:24px;font-size:12px;color:var(--text-3);font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;">
+        By submitting, you agree we'll reply by email. We don't share your details with anyone, ever.
+      </p>
+    </form>
+  </section>
+
+  <!-- ════ FAQ ════ -->
+  <section class="section container">
+    <div class="section-head reveal">
+      <div class="head-meta">
+        <span class="eyebrow accent">FAQ</span>
+      </div>
+      <h2>Common <span class="italic">questions.</span></h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;" class="reveal">
+      <div class="value-card">
+        <h3 style="font-size:22px;margin-bottom:12px;">How long does a typical project take?</h3>
+        <p style="font-size:14px;color:var(--text-2);line-height:1.6;">Identity projects: 8–12 weeks. Web projects: 10–14 weeks. Full rebrand with strategy + identity + web: 16–20 weeks. We'll give you a hard timeline before we start.</p>
+      </div>
+      <div class="value-card">
+        <h3 style="font-size:22px;margin-bottom:12px;">Do you work with brands outside India?</h3>
+        <p style="font-size:14px;color:var(--text-2);line-height:1.6;">Yes. About 30% of our work is for clients in the UK, US, and Southeast Asia. We work async-first, with weekly sync calls scheduled in your timezone.</p>
+      </div>
+      <div class="value-card">
+        <h3 style="font-size:22px;margin-bottom:12px;">What's your typical project budget?</h3>
+        <p style="font-size:14px;color:var(--text-2);line-height:1.6;">Identity-only projects start at ₹2 lakhs. Full brand + web programs sit between ₹6L and ₹15L. We're transparent about pricing — happy to share rates before you fill out a form.</p>
+      </div>
+      <div class="value-card">
+        <h3 style="font-size:22px;margin-bottom:12px;">Can we see your contract / process?</h3>
+        <p style="font-size:14px;color:var(--text-2);line-height:1.6;">Yes — we'll send you a sample SOW, our process document, and three references after the initial intro call. Everything's transparent from the start.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-block">
+          <div class="footer-logo">
+            <img class="brand-logo-img" src="assets/img/site/logo.svg" alt="Bosecrafts logo" width="180" height="45" onerror="this.hidden=true">
+            <span class="brand-word">Bosecrafts<span style="color:var(--accent);" aria-hidden="true">.</span></span>
+          </div>
+          <p class="footer-tagline">A design-led consultancy from Siliguri building brands that command attention.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Studio</h4>
+          <ul>
+            <li><a href="about.html">About</a></li>
+            <li><a href="work.html">Work</a></li>
+            <li><a href="index.html#services">Services</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="mailto:bosecrafts@gmail.com">bosecrafts@gmail.com</a></li>
+            <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+            <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Visit</h4>
+          <ul>
+            <li>Siliguri, West Bengal</li>
+            <li>India · 734001</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span>© 2026 Bosecrafts Studio</span>
+        <span>Made with intention in the Eastern Himalayas</span>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="assets/js/main.js"></script>
+</body>
+</html>

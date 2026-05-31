@@ -1,0 +1,86 @@
+---
+---
+<!-- Lightbox element is generated dynamically in the client-side script below to keep markup clean -->
+<script>
+  function initLightbox() {
+    const triggers = document.querySelectorAll('[data-lightbox]');
+    if (!triggers.length || document.querySelector('.lightbox')) return;
+
+    const lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.innerHTML = `
+      <button class="lb-close" aria-label="Close">×</button>
+      <button class="lb-prev" aria-label="Previous">‹</button>
+      <button class="lb-next" aria-label="Next">›</button>
+      <div class="lightbox-stage" data-stage></div>
+      <div class="lb-counter"></div>
+    `;
+    document.body.appendChild(lb);
+
+    const stage = lb.querySelector('[data-stage]') as HTMLElement;
+    const ctr = lb.querySelector('.lb-counter') as HTMLElement;
+    const items = Array.from(triggers);
+    let i = 0;
+
+    function open(idx: number) {
+      i = (idx + items.length) % items.length;
+      const trig = items[i];
+      
+      // Clone item for lightbox viewing
+      const inner = trig.cloneNode(true) as HTMLElement;
+      inner.removeAttribute('href');
+      inner.removeAttribute('data-lightbox');
+      
+      // Reset inline cursor style
+      inner.style.cursor = 'auto';
+      
+      // If the cloned element is an image, let's make sure it's fully responsive
+      const img = inner.querySelector('img') || (inner.tagName === 'IMG' ? inner : null);
+      if (img) {
+        inner.style.width = '100%';
+        inner.style.height = '100%';
+        inner.style.objectFit = 'contain';
+      }
+
+      stage.innerHTML = '';
+      stage.appendChild(inner);
+      
+      ctr.textContent = `${(i + 1).toString().padStart(2, '0')} / ${items.length.toString().padStart(2, '0')}`;
+      lb.classList.add('open');
+      document.body.classList.add('no-scroll');
+    }
+
+    function close() {
+      lb.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+    }
+
+    triggers.forEach((t, idx) => {
+      t.addEventListener('click', (e) => {
+        e.preventDefault();
+        open(idx);
+      });
+    });
+
+    lb.querySelector('.lb-close')?.addEventListener('click', close);
+    lb.querySelector('.lb-prev')?.addEventListener('click', () => open(i - 1));
+    lb.querySelector('.lb-next')?.addEventListener('click', () => open(i + 1));
+    
+    lb.addEventListener('click', (e) => {
+      if (e.target === lb) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') open(i - 1);
+      if (e.key === 'ArrowRight') open(i + 1);
+    });
+  }
+
+  // Initialize
+  initLightbox();
+
+  // Re-run on transitions
+  document.addEventListener('astro:after-swap', initLightbox);
+</script>

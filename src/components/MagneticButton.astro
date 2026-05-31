@@ -1,0 +1,19 @@
+---
+interface Props {
+  href?: string;
+  class?: string;
+  dataCursor?: string;
+}
+
+const { href, class: className = "", dataCursor } = Astro.props;
+---
+
+{href ? (
+  <a href={href} class={`btn ${className}`} data-cursor={dataCursor}>
+    <slot />
+  </a>
+) : (
+  <button class={`btn ${className}`} data-cursor={dataCursor}>
+    <slot />
+  </button>
+)}

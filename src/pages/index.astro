@@ -1,0 +1,290 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import WorkCard from '../components/WorkCard.astro';
+
+// Fetch featured projects for the bento grid
+const projects = await getCollection('projects');
+const featuredProjects = projects.filter(p => p.data.featured).slice(0, 3);
+const spans = ['span-7', 'span-5', 'span-12'];
+---
+
+<Layout title="Bosecrafts — Brands worth building." theme="chartreuse">
+  <!-- ════ HERO ════ -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-bg-glow"></div>
+
+    <div class="container">
+      <div class="hero-top-row">
+        <div class="hero-status">
+          <span class="dot"></span>
+          <span>Available for projects — Q3 2026</span>
+        </div>
+        <div class="hero-location">
+          <span data-clock>00:00 IST</span> · Siliguri, India
+        </div>
+      </div>
+
+      <h1 class="hero-h1">
+        <span class="word-mask"><span>We</span></span>
+        <span class="word-mask"><span>design</span></span>
+        <span class="word-mask"><span>brands</span></span>
+        <br>
+        <span class="word-mask"><span class="italic">worth</span></span>
+        <span class="word-mask"><span class="italic">building</span></span>
+        <span class="word-mask"><span>.</span></span>
+      </h1>
+
+      <div class="hero-bottom">
+        <p class="hero-desc">
+          Bosecrafts is a brand consultancy working with founders at the intersection of strategy and design. We help you build the kind of brand that <em style="font-family:'Instrument Serif',serif;font-style:italic;color:var(--accent);">opens rooms.</em>
+        </p>
+        <div class="hero-stat">
+          <div class="num" data-count>50+</div>
+          <div class="label">Brands shipped</div>
+        </div>
+        <div class="hero-actions">
+          <a href="/work" class="btn btn-primary" data-cursor="Explore">
+            <span>Selected Work</span>
+            <span class="icon">↗</span>
+          </a>
+          <a href="/contact" class="btn btn-ghost">
+            <span>Start a Project</span>
+            <span class="icon">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ MARQUEE ════ -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Brand Consulting</span><span class="dot"></span>
+      <span>Brand Identity</span><span class="dot"></span>
+      <span>Market Positioning</span><span class="dot"></span>
+      <span>Brand Architecture</span><span class="dot"></span>
+      <span>Growth Advisory</span><span class="dot"></span>
+      <span>Brand Strategy</span><span class="dot"></span>
+      <span>Visual Systems</span><span class="dot"></span>
+      <span>Naming</span><span class="dot"></span>
+      <span>Brand Consulting</span><span class="dot"></span>
+      <span>Brand Identity</span><span class="dot"></span>
+      <span>Market Positioning</span><span class="dot"></span>
+      <span>Brand Architecture</span><span class="dot"></span>
+      <span>Growth Advisory</span><span class="dot"></span>
+      <span>Brand Strategy</span><span class="dot"></span>
+      <span>Visual Systems</span><span class="dot"></span>
+      <span>Naming</span><span class="dot"></span>
+    </div>
+  </div>
+
+  <!-- ════ MANIFESTO / ABOUT ════ -->
+  <section class="section container" id="about">
+    <div class="section-head reveal">
+      <div class="head-meta">
+        <span class="eyebrow accent">Manifesto</span>
+      </div>
+      <h2>
+        Good design isn't<br>
+        <span class="italic">decoration.</span> It's<br>
+        the language your brand<br>
+        speaks before you do.
+      </h2>
+    </div>
+  </section>
+
+  <!-- ════ WORK ════ -->
+  <section class="section container" id="work">
+    <div class="section-head reveal">
+      <div class="head-meta">
+        <span class="eyebrow accent">Selected Work</span>
+        <a href="/work" class="btn-text">View all projects</a>
+      </div>
+      <h2>
+        Projects<br>
+        we're <span class="italic">proud</span> of.
+      </h2>
+    </div>
+
+    <div class="work-bento reveal">
+      {featuredProjects.map((project, i) => (
+        <WorkCard project={project} span={spans[i] || 'span-6'} />
+      ))}
+    </div>
+
+    <div class="work-cta-row reveal">
+      <a href="/work" class="btn btn-ghost" data-cursor="See All">
+        <span>See all {projects.length} projects</span>
+        <span class="icon">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ════ SERVICES ════ -->
+  <section class="section services-bg" id="services">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="head-meta">
+          <span class="eyebrow accent">What we do</span>
+        </div>
+        <h2>Where strategy<br>meets <span class="italic">craft.</span></h2>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-num">01 / Consulting</div>
+          <h3 class="service-title">Brand Consulting</h3>
+          <p class="service-desc">Strategic advisory at the intersection of business and brand. Positioning, revenue models, market entry — the decisions that determine whether your brand lands or gets ignored.</p>
+          <div class="service-tags">
+            <span class="service-tag">Positioning</span>
+            <span class="service-tag">Growth Advisory</span>
+            <span class="service-tag">Revenue Model</span>
+            <span class="service-tag">Market Entry</span>
+          </div>
+          <div class="service-arrow">↗</div>
+        </div>
+
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-num">02 / Identity</div>
+          <h3 class="service-title">Brand Identity</h3>
+          <p class="service-desc">Distinct, durable visual systems — wordmark, type, colour, and brand guidelines that hold their character from business card to billboard, across every format you'll ever need.</p>
+          <div class="service-tags">
+            <span class="service-tag">Logo Design</span>
+            <span class="service-tag">Type System</span>
+            <span class="service-tag">Colour</span>
+            <span class="service-tag">Guidelines</span>
+          </div>
+          <div class="service-arrow">↗</div>
+        </div>
+
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-num">03 / Strategy</div>
+          <h3 class="service-title">Brand Strategy</h3>
+          <p class="service-desc">Before a pixel is drawn, we answer the hard questions. Who you're for, what you stand for, and the gap in the market only you can own. Three weeks of thinking that shapes everything downstream.</p>
+          <div class="service-tags">
+            <span class="service-tag">Naming</span>
+            <span class="service-tag">Messaging</span>
+            <span class="service-tag">Tone of Voice</span>
+            <span class="service-tag">Architecture</span>
+          </div>
+          <div class="service-arrow">↗</div>
+        </div>
+
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-num">04 / Systems</div>
+          <h3 class="service-title">Visual Systems</h3>
+          <p class="service-desc">When your brand needs to live across formats — packaging, campaigns, digital, print — we build systems engineered to scale without losing the craft that made them matter in the first place.</p>
+          <div class="service-tags">
+            <span class="service-tag">Packaging</span>
+            <span class="service-tag">Campaigns</span>
+            <span class="service-tag">Digital</span>
+            <span class="service-tag">Print</span>
+          </div>
+          <div class="service-arrow">↗</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ PROCESS ════ -->
+  <section class="section container" id="process">
+    <div class="section-head reveal">
+      <div class="head-meta">
+        <span class="eyebrow accent">Process</span>
+      </div>
+      <h2>How a <span class="italic">project</span> moves.</h2>
+    </div>
+
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="process-num">01</div>
+        <h3 class="process-title">Discover</h3>
+        <p class="process-desc">Three weeks. Workshops with founders, interviews with customers, a forensic look at the competition.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="process-num">02</div>
+        <h3 class="process-title">Strategise</h3>
+        <p class="process-desc">Positioning, tone, the brief that everything downstream will be measured against. Signed off before pixels.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="process-num">03</div>
+        <h3 class="process-title">Design</h3>
+        <p class="process-desc">Six to ten weeks of craft. Identity, assets, and the rules that hold them together when the studio isn't in the room.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="process-num">04</div>
+        <h3 class="process-title">Ship</h3>
+        <p class="process-desc">Launch, hand-off, and a six-month follow-through window. We stay close until the brand is in operators' hands.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ STATS ════ -->
+  <section class="section container">
+    <div class="stats-grid reveal">
+      <div class="stat">
+        <div class="stat-num" data-count>50+</div>
+        <div class="stat-label">Brands Shipped</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-count>8</div>
+        <div class="stat-label">Years Operating</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" data-count>12</div>
+        <div class="stat-label">Industries Served</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3<span class="small">×</span></div>
+        <div class="stat-label">Avg. Revenue Growth</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ TESTIMONIAL ════ -->
+  <section class="testimonial">
+    <div class="container">
+      <blockquote class="testimonial-quote reveal">
+        Bosecrafts didn't just give us a logo — they gave us a way to talk about ourselves. Six months in, we're closing deals 40% faster.
+      </blockquote>
+      <div class="testimonial-author reveal reveal-delay-1">
+        <div class="author-avatar">RM</div>
+        <div class="author-info">
+          <div class="author-name">Rohan Mukherjee</div>
+          <div class="author-title">Founder, Artisan Collective</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ CTA ════ -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-eye eyebrow accent reveal">Let's Talk</div>
+      <h2 class="cta-headline reveal">
+        Have a brand<br>
+        worth <span class="italic">building?</span>
+      </h2>
+      <p class="cta-desc reveal reveal-delay-1">
+        We take on six to eight projects a year. Spots for Q3 are filling now.
+      </p>
+      <div class="cta-buttons reveal reveal-delay-2">
+        <a href="/contact" class="btn btn-primary" data-cursor="Start">
+          <span>Start a Project</span>
+          <span class="icon">↗</span>
+        </a>
+        <a href="/work" class="btn btn-ghost">
+          <span>See our Work</span>
+          <span class="icon">→</span>
+        </a>
+      </div>
+      <button class="cta-email-card reveal reveal-delay-3" data-copy-email="bosecrafts@gmail.com" data-cursor="Copy">
+        <span style="opacity:.6;">→</span>
+        <span>bosecrafts@gmail.com</span>
+        <span class="copy">Click to copy</span>
+      </button>
+    </div>
+  </section>
+</Layout>
