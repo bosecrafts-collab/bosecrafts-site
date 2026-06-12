@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --header-h: 4.5rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ivory text-ink font-sans antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  ::selection {
+    @apply bg-accent/40 text-ink;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-[11px] uppercase tracking-luxe text-smoke;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-3 border border-ink/80 px-8 py-4
+           text-[11px] uppercase tracking-luxe transition-colors duration-500 ease-luxe
+           hover:bg-ink hover:text-ivory
+           focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-clay;
+  }
+
+  .btn-light {
+    @apply btn-ghost border-ivory/90 text-ivory hover:bg-ivory hover:text-ink;
+  }
+
+  .link-draw {
+    @apply relative pb-1;
+  }
+  .link-draw::after {
+    content: "";
+    @apply absolute bottom-0 left-0 h-px w-0 bg-current transition-all duration-500 ease-luxe;
+  }
+  .link-draw:hover::after,
+  .link-draw:focus-visible::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 40s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none;
+    }
+  }
+}

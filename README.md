@@ -1,43 +1,47 @@
-# Astro Starter Kit: Minimal
+# Bosecrafts — Design Studio Website
 
-```sh
-npm create astro@latest -- --template minimal
+A design-led brand consultancy site for **Bosecrafts**, built with **Next.js 14**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**.
+
+## Quick start
+
+```bash
+npm install
+npm run dev
+# → http://localhost:3000
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Pages
 
-## 🚀 Project Structure
+| Route       | Purpose                          |
+| ----------- | -------------------------------- |
+| `/`         | Home — hero, work, services, CTA |
+| `/work`     | Project portfolio                |
+| `/studio`   | About the team and values        |
+| `/contact`  | Project enquiry form             |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Editing content (no coding needed)
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+Most site copy lives in one file:
+
+```
+lib/data.ts
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Edit there to change:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- Contact email and phone
+- Project names and descriptions
+- Services, team bios, stats
+- Navigation labels
 
-Any static assets, like images, can be placed in the `public/` directory.
+Then ask Cursor to apply the changes, or run `npm run dev` to preview locally.
 
-## 🧞 Commands
+## Deploy
 
-All commands are run from the root of the project, from a terminal:
+Configured for **Netlify** via `netlify.toml`. Connect your repo or drag the folder to [Netlify Drop](https://app.netlify.com/drop).
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Design
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Fonts:** Instrument Serif + Inter
+- **Accent:** Chartreuse `#D9F65A`
+- **Motion:** Subtle scroll reveals; respects `prefers-reduced-motion`
