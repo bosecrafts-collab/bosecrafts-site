@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --header-h: 4.5rem;
+  --header-h: 5rem;
 }
 
 @layer base {
@@ -17,9 +17,10 @@
   }
 
   ::selection {
-    @apply bg-accent/40 text-ink;
+    @apply bg-clay/30 text-ink;
   }
 
+  /* Respect users who prefer reduced motion */
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -35,10 +36,12 @@
 }
 
 @layer components {
+  /* Small uppercase label used above headings */
   .eyebrow {
     @apply text-[11px] uppercase tracking-luxe text-smoke;
   }
 
+  /* Low-profile editorial CTA */
   .btn-ghost {
     @apply inline-flex items-center gap-3 border border-ink/80 px-8 py-4
            text-[11px] uppercase tracking-luxe transition-colors duration-500 ease-luxe
@@ -50,6 +53,7 @@
     @apply btn-ghost border-ivory/90 text-ivory hover:bg-ivory hover:text-ink;
   }
 
+  /* Underline link that draws in from the left */
   .link-draw {
     @apply relative pb-1;
   }
@@ -60,26 +64,5 @@
   .link-draw:hover::after,
   .link-draw:focus-visible::after {
     @apply w-full;
-  }
-}
-
-@layer utilities {
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  .animate-marquee {
-    animation: marquee 40s linear infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-marquee {
-      animation: none;
-    }
   }
 }

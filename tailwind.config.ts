@@ -8,14 +8,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ivory: "#FFFFFF",
-        cream: "#F5F2EE",
-        sand: "#ECE7E1",
-        clay: "#6F6256",
-        moss: "#4D433B",
-        ink: "#111111",
-        smoke: "#6E6A63",
-        accent: "#D9F65A",
+        // Editorial palette — warm, paper-like neutrals + muted earth tones
+        ivory: "#FFFFFF",     // page background (white, matching reference)
+        cream: "#F7F5F2",     // alternate section background
+        sand: "#E8E4DE",      // borders / dividers
+        clay: "#A98467",      // muted earth accent (hover, eyebrows)
+        moss: "#6B705C",      // secondary earth accent
+        ink: "#1C1B19",       // near-black text
+        smoke: "#6E6A63",     // secondary text
       },
       fontFamily: {
         serif: ["var(--font-serif)", "Georgia", "serif"],

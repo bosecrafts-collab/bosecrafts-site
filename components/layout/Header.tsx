@@ -2,23 +2,32 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Menu, X } from "lucide-react";
-import { nav, site } from "@/lib/data";
+import { ChevronDown, Heart, Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { megaMenu, collections } from "@/lib/data";
 import { EASE_LUXE } from "@/components/motion/Reveal";
+import CartDrawer from "@/components/layout/CartDrawer";
+
+const primaryNav = [
+  { label: "Home", href: "/" },
+  { label: "Shop", href: "/shop", mega: true },
+  { label: "About Us", href: "/story" },
+  { label: "Contact Us", href: "/contact" },
+];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [megaOpen, setMegaOpen] = useState(false);
   const pathname = usePathname();
   const reduce = useReducedMotion();
 
-  const heroPage = pathname === "/";
-  const solid = scrolled || !heroPage || menuOpen;
-
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 32);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -26,126 +35,220 @@ export default function Header() {
 
   useEffect(() => {
     setMenuOpen(false);
+    setSearchOpen(false);
+    setMegaOpen(false);
   }, [pathname]);
 
-  const tone = solid ? "text-ink" : "text-ivory";
+  // Two featured image tiles inside the mega menu
+  const megaTiles = collections.slice(0, 2);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ease-luxe
-        ${solid ? "border-b border-sand/70 bg-ivory/95 backdrop-blur-md" : "border-b border-transparent bg-transparent"}`}
-    >
-      <div
-        className={`mx-auto grid h-[var(--header-h)] max-w-editorial grid-cols-[1fr_auto_1fr] items-center px-6 md:px-10 ${tone}`}
+    <>
+      <header
+        className={`sticky top-0 z-50 bg-ivory transition-shadow duration-300
+          ${scrolled ? "shadow-[0_1px_0_0_theme(colors.sand),0_8px_24px_-16px_rgba(0,0,0,0.18)]" : "border-b border-sand"}`}
       >
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`link-draw text-[11px] uppercase tracking-luxe ${
-                pathname === item.href ? "opacity-100" : "opacity-80"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <button
-          type="button"
-          onClick={() => setMenuOpen((v) => !v)}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          className="flex h-11 w-11 items-center justify-center md:hidden"
-        >
-          {menuOpen ? (
-            <X size={20} strokeWidth={1.25} />
-          ) : (
-            <Menu size={20} strokeWidth={1.25} />
-          )}
-        </button>
-
-        <Link
-          href="/"
-          className="justify-self-center font-serif text-2xl tracking-tight md:text-[1.85rem]"
-          aria-label={`${site.name} — home`}
-        >
-          {site.name}
-          <span className="text-accent">.</span>
-        </Link>
-
-        <div className="flex items-center justify-end">
-          <Link
-            href="/contact"
-            className={`hidden items-center gap-2 border px-5 py-2.5 text-[11px] uppercase tracking-luxe transition-colors duration-500 ease-luxe md:inline-flex
-              ${solid ? "border-ink/80 hover:bg-ink hover:text-ivory" : "border-ivory/80 hover:bg-ivory hover:text-ink"}`}
+        <div className="mx-auto flex h-[var(--header-h)] max-w-editorial items-center justify-between gap-6 px-4 md:px-8">
+          {/* Mobile menu toggle */}
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            className="flex h-11 w-11 items-center justify-center lg:hidden"
           >
-            Start a Project
-            <ArrowUpRight size={13} strokeWidth={1.25} />
+            {menuOpen ? <X size={22} strokeWidth={1.25} /> : <Menu size={22} strokeWidth={1.25} />}
+          </button>
+
+          {/* Logo — left, tagline beneath. Swap for your client's logo image. */}
+          <Link href="/" className="flex flex-col leading-none" aria-label="Home">
+            <span className="font-serif text-[1.65rem] tracking-[0.18em]">MORSA</span>
+            <span className="mt-1 hidden text-[9px] uppercase tracking-luxe text-smoke md:block">
+              Luxury Goods Through Sustainability
+            </span>
           </Link>
-        </div>
-      </div>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.nav
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: reduce ? 0 : 0.5, ease: EASE_LUXE }}
-            className="overflow-hidden border-b border-sand bg-ivory md:hidden"
-            aria-label="Mobile"
-          >
-            <ul className="px-6 py-6">
-              {nav.map((item, i) => (
-                <motion.li
-                  key={item.href}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.08 * i, duration: 0.5, ease: EASE_LUXE }}
+          {/* Primary nav with mega menu trigger */}
+          <nav className="hidden items-center gap-9 lg:flex" aria-label="Primary">
+            {primaryNav.map((item) =>
+              item.mega ? (
+                <div
+                  key={item.label}
+                  onMouseEnter={() => setMegaOpen(true)}
+                  onMouseLeave={() => setMegaOpen(false)}
                 >
                   <Link
                     href={item.href}
-                    className="block py-3 font-serif text-2xl text-ink"
+                    aria-expanded={megaOpen}
+                    onFocus={() => setMegaOpen(true)}
+                    className="flex min-h-11 items-center gap-1 text-[12px] uppercase tracking-wide2 hover:text-clay"
                   >
                     {item.label}
+                    <ChevronDown size={12} strokeWidth={1.5} />
                   </Link>
-                </motion.li>
-              ))}
-              <motion.li
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.32, duration: 0.5, ease: EASE_LUXE }}
-              >
+                </div>
+              ) : (
                 <Link
-                  href="/contact"
-                  className="mt-4 inline-flex items-center gap-2 border border-ink/80 px-5 py-3 text-[11px] uppercase tracking-luxe"
+                  key={item.label}
+                  href={item.href}
+                  className="flex min-h-11 items-center text-[12px] uppercase tracking-wide2 hover:text-clay"
                 >
-                  Start a Project
-                  <ArrowUpRight size={13} strokeWidth={1.25} />
+                  {item.label}
                 </Link>
-              </motion.li>
-              <motion.li
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4, duration: 0.5, ease: EASE_LUXE }}
-                className="mt-8 space-y-2"
+              )
+            )}
+          </nav>
+
+          {/* Utility icons — search, account, wishlist, cart with counters */}
+          <div className="flex items-center gap-1 md:gap-3">
+            <button
+              type="button"
+              onClick={() => setSearchOpen((v) => !v)}
+              aria-label="Toggle search"
+              aria-expanded={searchOpen}
+              className="flex h-11 w-11 items-center justify-center hover:text-clay"
+            >
+              <Search size={19} strokeWidth={1.25} />
+            </button>
+            <Link
+              href="/account"
+              aria-label="Account login"
+              className="hidden h-11 w-11 items-center justify-center hover:text-clay md:flex"
+            >
+              <User size={19} strokeWidth={1.25} />
+            </Link>
+            <Link
+              href="/wishlist"
+              aria-label="Wishlist, 0 items"
+              className="relative hidden h-11 w-11 items-center justify-center hover:text-clay md:flex"
+            >
+              <Heart size={19} strokeWidth={1.25} />
+              <Count n={0} />
+            </Link>
+            <button
+              type="button"
+              onClick={() => setCartOpen(true)}
+              aria-label="Open cart, 0 items"
+              className="relative flex h-11 w-11 items-center justify-center hover:text-clay"
+            >
+              <ShoppingBag size={19} strokeWidth={1.25} />
+              <Count n={0} />
+            </button>
+          </div>
+        </div>
+
+        {/* Mega menu — link column + two image tiles */}
+        <AnimatePresence>
+          {megaOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: reduce ? 0 : -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: reduce ? 0 : -6 }}
+              transition={{ duration: 0.25, ease: EASE_LUXE }}
+              onMouseEnter={() => setMegaOpen(true)}
+              onMouseLeave={() => setMegaOpen(false)}
+              className="absolute inset-x-0 top-full hidden border-b border-sand bg-ivory lg:block"
+            >
+              <div className="mx-auto grid max-w-editorial grid-cols-12 gap-10 px-8 py-10">
+                <ul className="col-span-4 space-y-4">
+                  {megaMenu.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        className="link-draw inline-flex items-center gap-2 text-sm uppercase tracking-wide2"
+                      >
+                        {link.label}
+                        {link.isNew && (
+                          <sup className="text-[9px] font-medium tracking-luxe text-clay">New</sup>
+                        )}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                {megaTiles.map((c) => (
+                  <Link key={c.id} href={`/shop?c=${c.slug}`} className="group col-span-4">
+                    <div className="relative aspect-[3/4] max-h-80 w-full overflow-hidden bg-cream">
+                      <Image
+                        src={c.image}
+                        alt={c.name}
+                        fill
+                        sizes="320px"
+                        className="object-cover transition-transform duration-700 ease-luxe group-hover:scale-105"
+                      />
+                    </div>
+                    <p className="mt-3 text-xs uppercase tracking-wide2 group-hover:text-clay">
+                      {c.name}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Search bar */}
+        <AnimatePresence>
+          {searchOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: reduce ? 0 : 0.4, ease: EASE_LUXE }}
+              className="overflow-hidden border-t border-sand bg-ivory"
+            >
+              <form
+                role="search"
+                onSubmit={(e) => e.preventDefault()}
+                className="mx-auto flex max-w-editorial items-center gap-4 px-4 py-4 md:px-8"
               >
-                <a
-                  href={`mailto:${site.email}`}
-                  className="block text-sm text-smoke"
-                >
-                  {site.email}
-                </a>
-                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="block text-sm text-smoke">
-                  {site.phone}
-                </a>
-              </motion.li>
-            </ul>
-          </motion.nav>
-        )}
-      </AnimatePresence>
-    </header>
+                <Search size={16} strokeWidth={1.25} className="shrink-0 text-smoke" />
+                <label htmlFor="site-search" className="sr-only">Search our site</label>
+                <input
+                  id="site-search"
+                  type="search"
+                  placeholder="Search our site…"
+                  autoFocus
+                  className="w-full bg-transparent text-sm focus:outline-none"
+                />
+              </form>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.nav
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: reduce ? 0 : 0.45, ease: EASE_LUXE }}
+              className="overflow-hidden border-t border-sand bg-ivory lg:hidden"
+              aria-label="Mobile"
+            >
+              <ul className="px-5 py-4">
+                {[primaryNav[0], ...megaMenu.map((m) => ({ label: m.label, href: m.href })), primaryNav[2], primaryNav[3]].map((item) => (
+                  <li key={item.label} className="border-b border-sand/60 last:border-0">
+                    <Link href={item.href} className="block py-3.5 text-sm uppercase tracking-wide2">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.nav>
+          )}
+        </AnimatePresence>
+      </header>
+
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+    </>
+  );
+}
+
+function Count({ n }: { n: number }) {
+  return (
+    <span className="absolute right-0.5 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-ink text-[9px] text-ivory">
+      {n}
+    </span>
   );
 }

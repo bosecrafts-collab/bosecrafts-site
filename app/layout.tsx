@@ -1,30 +1,31 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Inter } from "next/font/google";
+import { Cormorant_Garamond, Jost } from "next/font/google";
 import "./globals.css";
+import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import PageTransition from "@/components/motion/PageTransition";
-import { site } from "@/lib/data";
 
-const serif = Instrument_Serif({
+const serif = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   variable: "--font-serif",
   display: "swap",
 });
 
-const sans = Inter({
+const sans = Jost({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500"],
   variable: "--font-sans",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.tagline}`,
-  description: site.description,
-  metadataBase: new URL(site.url),
+  title: "Your Brand — Luxury Goods Through Sustainability",
+  description:
+    "Hand-knitted mohair cardigans, jerseys and vests plus upcycled artisanal bags — made to order in Cape Town, shipped worldwide.",
 };
 
 export default function RootLayout({
@@ -39,11 +40,13 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <AnnouncementBar />
         <Header />
         <div id="main">
           <PageTransition>{children}</PageTransition>
         </div>
         <Footer />
+        <MobileBottomNav />
       </body>
     </html>
   );
